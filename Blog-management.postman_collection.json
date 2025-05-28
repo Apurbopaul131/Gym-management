@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "2bf92883-ad0a-465b-a7e6-0209f96e9fed",
+		"name": "Blog-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18942348"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"securepassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"email\": \"apurbopaul131@gmail.com\",\r\n  \"password\": \"apurbopaul131\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog-management-server.vercel.app/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"blog-management-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Create Blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZlYjY1YWM3MWY3Njk3MmJmZTU3ZTEiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTczNTMxMDgyMywiZXhwIjoxNzM2MTc0ODIzfQ.PXQyn6EQ3zDEW8nAeuq8F9UiIJo5Y_rCZJUAx5IiqAQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"My First Blog\",\r\n  \"content\": \"This is the content of my blog.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/blogs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 67866095217cd815596a4262",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://blog-management-server.vercel.app/api/blogs/67866095217cd815596a4262",
+							"protocol": "https",
+							"host": [
+								"blog-management-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"67866095217cd815596a4262"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZmYTA2M2UxOTBhZmIwMWEyNTg0MDEiLCJlbWFpbCI6ImFwdXJib3BhdWwxMzFAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzUzNjg4MjEsImV4cCI6MTczNjIzMjgyMX0.ALuSZOHmbijclPzVmXAoEfnp0qGtab-K8cksfImW7SY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Blog Title\",\r\n  \"content\": \"Updated content.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/blogs/676fa325261341e808d20a3d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"blogs",
+								"676fa325261341e808d20a3d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Blog",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Block User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
