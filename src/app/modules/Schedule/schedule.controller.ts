@@ -44,9 +44,24 @@ const cancleSchedule = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+const getTrainerSchedule = catchAsync(async (req: Request, res: Response) => {
+  const result = await ScheduleServices.getTrainerScheduleFromDB(
+    req?.user?.userId,
+  );
+
+  //send response to client
+  sendResponse(res, {
+    success: true,
+    message: 'Schedule cancle successfully',
+    statusCode: 201,
+    data: result,
+  });
+});
 // Exporting the controllers
 export const SchedulControllers = {
   createScheduleClass,
   bookSchedule,
   cancleSchedule,
+  getTrainerSchedule,
 };

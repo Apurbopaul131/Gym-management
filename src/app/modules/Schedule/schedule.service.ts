@@ -4,6 +4,18 @@ import { ClassSchedule } from './schedule.model';
 import { addHoursToTime } from './schedule.utils';
 
 const createScheduleClass = async (payload: IClassSchedule) => {
+  // Check if the trainer exists
+  const trainerExists = await ClassSchedule.findById(payload.trainer);
+  if (!trainerExists) {
+    throw new AppError(404, 'Trainer not found');
+  }
+  //check if all trainees exist
+  payload.trainees.forEach(async (traineeId) => {
+    const traineeExists = await ClassSchedule.findById(traineeId);
+    if (!traineeExists) {
+      throw new AppError(404, `Trainee with ID ${traineeId} not found`);
+    }
+  });
   const preparedData = {
     ...payload,
     availavality: 10 - payload?.trainees?.length,
@@ -83,8 +95,21 @@ const cancleSchedule = async (scheduleId: string, traineeId: string) => {
   );
   return updatedSchedule;
 };
+
+const getTrainerScheduleFromDB = async (trainerId: string) => {
+  const schedules = await ClassSchedule.find({ trainer: trainerId })
+    .populate('trainer', 'name email')
+    .populate('trainees', 'name email')
+    .select('date startTime endTime trainer trainees availavality');
+
+  if (!schedules || schedules.length === 0) {
+    throw new AppError(404, 'No schedules found for this trainer');
+  }
+  return schedules;
+};
 export const ScheduleServices = {
   createScheduleClass,
   bookScheduleIntoDB,
   cancleSchedule,
+  getTrainerScheduleFromDB,
 };

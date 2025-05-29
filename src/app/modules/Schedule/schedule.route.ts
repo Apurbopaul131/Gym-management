@@ -23,4 +23,12 @@ router.delete(
   auth(USER_ROLE?.Trainee),
   SchedulControllers.cancleSchedule,
 );
+
+// Show Trainer schedule class
+router.get(
+  '/auth/trainer-schedule',
+  auth(USER_ROLE?.Trainer),
+  SchedulControllers.getTrainerSchedule,
+);
+// Exporting the router
 export const ScheduleRoutes = router;
