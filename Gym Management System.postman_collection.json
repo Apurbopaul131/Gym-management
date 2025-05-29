@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "3ec6500a-f4ee-4e88-8a2d-cd3646905384",
+		"name": "Gym Management System",
+		"description": "The Gym Class Scheduling and Membership Management System is designed to manage gym operations efficiently. The system defines three roles: Admin, Trainer, and Trainee, each with specific permissions. Admins are responsible for creating and managing trainers, scheduling classes, and assigning trainers to these schedules. Each day can have a maximum of five class schedules, with each class lasting two hours. Trainers conduct the classes and can view their assigned class schedules but cannot create new schedules or manage trainee profiles. Trainees can create and manage their own profiles and book class schedules if there is availability, with a maximum of ten trainees per schedule.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18942348"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Create Trainee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Shimul Das\",\r\n    \"email\": \"shimul99@gmail.com\",\r\n    \"password\": \"securepasswordss\",\r\n    \"role\": \"Trainee\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/create-trainee",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"create-trainee"
+							]
+						},
+						"description": "This Api is responsible for creatiing an Trainee."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trainer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODM3MmYwOWE5ZTE1MjdmYTQ1MTZiMmMiLCJlbWFpbCI6ImFkbWluMTIxQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0ODUyMzY4NywiZXhwIjoxNzQ5Mzg3Njg3fQ.YZ2dT9aRk4oeEF51DoYhLkNh34BRm-Ky-gPWRZpDxQA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bappy\",\r\n    \"email\": \"bappy322@gmail.com\",\r\n    \"password\": \"securepasswordss\",\r\n    \"role\": \"Trainer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/create-trainer",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"create-trainer"
+							]
+						},
+						"description": "This Api is responsible to create Trainer. You must need to add an **Admin token** into headers start with **Bearer** keyword."
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sourob135@gmail.com\",\r\n    \"password\": \"securepasswordss\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "This Api is responsible for mange login using jwt. You must add an token like **Admin, Trainer or Trainee** into headers start with **Bearer** keyword."
+					},
+					"response": []
+				}
+			],
+			"description": "This Folder handle all authentication related work."
+		},
+		{
+			"name": "Schedule Class",
+			"item": [
+				{
+					"name": "Create Class Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODM3MmYwOWE5ZTE1MjdmYTQ1MTZiMmMiLCJlbWFpbCI6ImRoYWthMTIxQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0ODQ5ODQ3NCwiZXhwIjoxNzQ5MzYyNDc0fQ.lZxiNkSNQxqeUor920KUD-QFiRf1UC5gr3uDV1HhMrw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classTitle\": \"Evening Strength Training\",\r\n    \"date\": \"2025-06-01\",\r\n    \"startTime\": \"12:00\",\r\n    \"trainer\": \"6837faad83bbf20364181566\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/create-schedule",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"create-schedule"
+							]
+						},
+						"description": "This Api is responsible for create an class schedule.You must need to add an **Admin token** into headers start with **Bearer** keyword and provide **class schedule data** into **request body**."
+					},
+					"response": []
+				},
+				{
+					"name": "Book Class Schedule",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODM4Mzc0MTZlOGU1OWRlODcwY2ZmMDciLCJlbWFpbCI6ImFrYXNoMzNAZ21haWwuY29tIiwicm9sZSI6IlRyYWluZWUiLCJpYXQiOjE3NDg1MjU0MjEsImV4cCI6MTc0OTM4OTQyMX0.ljGut8odRX45imu9gNw2euHuvsucR9SXELCGr-mjZsw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/book-schedule/683860cad3fb23518d1f60ad",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"book-schedule",
+								"683860cad3fb23518d1f60ad"
+							]
+						},
+						"description": "This Api is responsible for book an schedule class for Trainee. You must need to add an **Trainee** **token** into headers start with **Bearer** keyword and provide an **dynamic params** of the **schedule class id**."
+					},
+					"response": []
+				},
+				{
+					"name": "Cancle Booking of Schedule Class",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODM3ZmJmNjgzYmJmMjAzNjQxODE1NmQiLCJlbWFpbCI6ImFiaXIzM0BnbWFpbC5jb20iLCJyb2xlIjoiVHJhaW5lZSIsImlhdCI6MTc0ODUyNjM3MCwiZXhwIjoxNzQ5MzkwMzcwfQ.VvPE_pP1rYIb7XvR-vd3Dh1F3_HYiwWcuJSm4R_Jo1s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/cancel-schedule/6838032649d4931932c96617",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"cancel-schedule",
+								"6838032649d4931932c96617"
+							]
+						},
+						"description": "This Api is responsible for cancle an booking of the class schedule. You must need to add an **Trainee** **token** into headers start with **Bearer** keyword and provide an **dynamic params** of the **schedule class id.**"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Trainer Schedule",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODM3ZmFhZDgzYmJmMjAzNjQxODE1NjYiLCJlbWFpbCI6InNvdXJvYjEzNUBnbWFpbC5jb20iLCJyb2xlIjoiVHJhaW5lciIsImlhdCI6MTc0ODUyNjc2OCwiZXhwIjoxNzQ5MzkwNzY4fQ.5XO2OxXm9YW6rXq0nj2TwLKJ_VOlwLDsN8DCY_HYHNk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://gym-management-app-pi.vercel.app/api/auth/trainer-schedule",
+							"protocol": "https",
+							"host": [
+								"gym-management-app-pi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"trainer-schedule"
+							]
+						},
+						"description": "This api is responsibe for retrives Trainer class schedule details. You must need to add an **Trainer** **token** into headers start with **Bearer** keyword."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder handle schedule class, bookings, cancle bookings and veiw trainer schedule."
+		}
+	]
+}
