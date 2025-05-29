@@ -58,7 +58,33 @@ const bookScheduleIntoDB = async (scheduleId: string, traineeId: string) => {
   );
   return updatedSchedule;
 };
+
+const cancleSchedule = async (scheduleId: string, traineeId: string) => {
+  const schedule = await ClassSchedule.findById(scheduleId);
+  // Check if the schedule exists
+  if (!schedule) {
+    throw new AppError(404, 'Schedule not found');
+  }
+  // Check if the trainee is booked for this schedule
+  const traineesIdScheduleString = schedule?.trainees.map((id) =>
+    id.toString(),
+  );
+  if (!traineesIdScheduleString.includes(traineeId)) {
+    throw new AppError(400, 'Trainee is not booked for this schedule');
+  }
+  // Remove the trainee from the schedule and update availability
+  const updatedSchedule = await ClassSchedule.findByIdAndUpdate(
+    scheduleId,
+    {
+      $pull: { trainees: traineeId },
+      availavality: schedule.availavality + 1,
+    },
+    { new: true },
+  );
+  return updatedSchedule;
+};
 export const ScheduleServices = {
   createScheduleClass,
   bookScheduleIntoDB,
+  cancleSchedule,
 };

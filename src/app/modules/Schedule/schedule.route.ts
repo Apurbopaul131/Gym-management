@@ -16,4 +16,11 @@ router.patch(
   auth(USER_ROLE?.Trainee),
   SchedulControllers.bookSchedule,
 );
+
+// cancle an schedule class
+router.delete(
+  '/auth/cancel-schedule/:id',
+  auth(USER_ROLE?.Trainee),
+  SchedulControllers.cancleSchedule,
+);
 export const ScheduleRoutes = router;
