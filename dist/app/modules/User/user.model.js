@@ -34,8 +34,10 @@ const userSchema = new mongoose_1.Schema({
     },
     role: {
         type: String,
-        enum: { values: user_constant_1.role, message: '{VALUE} is not supported' },
-        default: 'user',
+        enum: {
+            values: user_constant_1.role,
+            message: '{VALUE} is not supported must be Admin | Trainer | Trainee',
+        },
     },
     isBlocked: {
         type: Boolean,

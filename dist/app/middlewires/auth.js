@@ -39,7 +39,7 @@ const auth = (...requiredRoles) => {
             }
             //check Authorization who are authorize to access the data
             if (requiredRoles && !requiredRoles.includes(role)) {
-                throw new AppError_1.default(401, 'Invalid credentials');
+                throw new AppError_1.default(401, 'Unauthorized access');
             }
             req.user = decoded;
             next();

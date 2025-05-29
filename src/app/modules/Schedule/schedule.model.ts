@@ -5,6 +5,10 @@ import { addHoursToTime, timeToMinutes } from './schedule.utils';
 
 const classScheduleSchema = new Schema<IClassSchedule, ScheduleModel>(
   {
+    classTitle: {
+      type: String,
+      required: [true, 'Class title is required'],
+    },
     date: {
       type: Date,
       required: [true, 'Date is required'],
@@ -28,10 +32,7 @@ const classScheduleSchema = new Schema<IClassSchedule, ScheduleModel>(
         ref: 'User',
       },
     ],
-    classTitle: {
-      type: String,
-      required: [true, 'Class title is required'],
-    },
+
     availavality: {
       type: Number,
       required: [true, 'Availability is required'],

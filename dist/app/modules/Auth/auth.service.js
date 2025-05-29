@@ -17,7 +17,29 @@ const config_1 = __importDefault(require("../../config"));
 const AppError_1 = __importDefault(require("../../error/AppError"));
 const user_model_1 = require("../User/user.model");
 const auth_uitls_1 = require("./auth.uitls");
-const registerUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const createTrainerIntoDb = (adminInfo, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const isUserExist = yield user_model_1.User.findOne({
+        email: adminInfo === null || adminInfo === void 0 ? void 0 : adminInfo.email,
+        role: adminInfo === null || adminInfo === void 0 ? void 0 : adminInfo.role,
+    });
+    //check if user is exist
+    if (!isUserExist) {
+        throw new AppError_1.default(404, 'Admin not found!');
+    }
+    //check if user is blocked
+    if (isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.isBlocked) {
+        throw new AppError_1.default(403, 'Admin is blocked!');
+    }
+    if ((payload === null || payload === void 0 ? void 0 : payload.role) !== 'Trainer') {
+        throw new AppError_1.default(403, `Admin does not create ${payload === null || payload === void 0 ? void 0 : payload.role}`);
+    }
+    const result = yield user_model_1.User.create(payload);
+    return result;
+});
+const createTraineeIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    if ((payload === null || payload === void 0 ? void 0 : payload.role) !== 'Trainee') {
+        throw new AppError_1.default(403, 'Role must be trinee');
+    }
     const result = yield user_model_1.User.create(payload);
     return result;
 });
@@ -49,6 +71,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     };
 });
 exports.AuthServices = {
-    registerUserIntoDB,
+    createTraineeIntoDB,
     loginUser,
+    createTrainerIntoDb,
 };

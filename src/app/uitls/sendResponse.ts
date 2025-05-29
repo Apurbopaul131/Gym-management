@@ -19,14 +19,14 @@ const sendResponse = <T>(
   const responseObj = data?.data
     ? {
         success: data?.success,
-        message: data?.message,
         statusCode: data?.statusCode,
-        data: data?.data,
+        message: data?.message,
+        Data: data?.data,
       }
     : {
         success: data?.success,
-        message: data?.message,
         statusCode: data?.statusCode,
+        message: data?.message,
       };
   return res.status(data?.statusCode).json(responseObj);
 };

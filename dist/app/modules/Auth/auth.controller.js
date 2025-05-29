@@ -16,14 +16,26 @@ exports.AuthControllers = void 0;
 const catchAsync_1 = __importDefault(require("../../uitls/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../uitls/sendResponse"));
 const auth_service_1 = require("./auth.service");
-const registerUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield auth_service_1.AuthServices.registerUserIntoDB(req.body);
-    //destructure the properities to send the client
-    const { _id, name, email } = result.toObject();
+const createTrainer = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { _id, name, email } = yield auth_service_1.AuthServices.createTrainerIntoDb(req === null || req === void 0 ? void 0 : req.user, req.body);
     //send response to client
     (0, sendResponse_1.default)(res, {
         success: true,
-        message: 'User registered successfully',
+        message: 'Trainer created successfully',
+        statusCode: 201,
+        data: {
+            _id,
+            name,
+            email,
+        },
+    });
+}));
+const createTrainee = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { _id, name, email } = yield auth_service_1.AuthServices.createTraineeIntoDB(req.body);
+    //send response to client
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        message: 'Trinee registered successfully',
         statusCode: 201,
         data: {
             _id,
@@ -43,6 +55,7 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     });
 }));
 exports.AuthControllers = {
-    registerUser,
+    createTrainee,
     loginUser,
+    createTrainer,
 };

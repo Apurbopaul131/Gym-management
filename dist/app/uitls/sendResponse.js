@@ -4,14 +4,14 @@ const sendResponse = (res, data) => {
     const responseObj = (data === null || data === void 0 ? void 0 : data.data)
         ? {
             success: data === null || data === void 0 ? void 0 : data.success,
-            message: data === null || data === void 0 ? void 0 : data.message,
             statusCode: data === null || data === void 0 ? void 0 : data.statusCode,
-            data: data === null || data === void 0 ? void 0 : data.data,
+            message: data === null || data === void 0 ? void 0 : data.message,
+            Data: data === null || data === void 0 ? void 0 : data.data,
         }
         : {
             success: data === null || data === void 0 ? void 0 : data.success,
-            message: data === null || data === void 0 ? void 0 : data.message,
             statusCode: data === null || data === void 0 ? void 0 : data.statusCode,
+            message: data === null || data === void 0 ? void 0 : data.message,
         };
     return res.status(data === null || data === void 0 ? void 0 : data.statusCode).json(responseObj);
 };

@@ -3,11 +3,15 @@ import auth from '../../middlewires/auth';
 import { USER_ROLE } from '../User/user.constant';
 import { SchedulControllers } from './schedule.controller';
 
+import validateRequest from '../../middlewires/validateRequest';
+import { ScheduleValidations } from './schedule.validation';
+
 const router = express.Router();
 //create schedule class
 router.post(
   '/auth/create-schedule',
   auth(USER_ROLE?.Admin),
+  validateRequest(ScheduleValidations.createtrainingClassValidationSchema),
   SchedulControllers.createScheduleClass,
 );
 // book an schedule class

@@ -23,11 +23,9 @@ const createUserValidationSchema = zod_1.z.object({
             invalid_type_error: 'Password must be string',
         })
             .min(8, { message: 'Must be 8 or more characters long' }),
-        role: zod_1.z
-            .enum([...user_constant_1.role], {
-            message: 'Role must be admin | user',
-        })
-            .optional(),
+        role: zod_1.z.enum([...user_constant_1.role], {
+            message: 'Role must be Admin | Trainer | Trainee',
+        }),
         isBlocked: zod_1.z
             .boolean({
             invalid_type_error: 'isBlocked must be boolean',

@@ -53,7 +53,7 @@ const getTrainerSchedule = catchAsync(async (req: Request, res: Response) => {
   //send response to client
   sendResponse(res, {
     success: true,
-    message: 'Schedule cancle successfully',
+    message: 'Trainer Schedule retrived successfully',
     statusCode: 201,
     data: result,
   });

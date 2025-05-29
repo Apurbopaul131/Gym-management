@@ -1,25 +1,29 @@
 import AppError from '../../error/AppError';
+import { User } from '../User/user.model';
 import { IClassSchedule } from './schedule.interface';
 import { ClassSchedule } from './schedule.model';
 import { addHoursToTime } from './schedule.utils';
 
-const createScheduleClass = async (payload: IClassSchedule) => {
+const createScheduleClass = async (
+  payload: Pick<
+    IClassSchedule,
+    'classTitle' | 'date' | 'startTime' | 'trainer'
+  >,
+) => {
   // Check if the trainer exists
-  const trainerExists = await ClassSchedule.findById(payload.trainer);
+  const trainerExists = await User.findOne({
+    _id: payload.trainer,
+    role: 'Trainer',
+  });
   if (!trainerExists) {
     throw new AppError(404, 'Trainer not found');
   }
-  //check if all trainees exist
-  payload.trainees.forEach(async (traineeId) => {
-    const traineeExists = await ClassSchedule.findById(traineeId);
-    if (!traineeExists) {
-      throw new AppError(404, `Trainee with ID ${traineeId} not found`);
-    }
-  });
+
   const preparedData = {
     ...payload,
-    availavality: 10 - payload?.trainees?.length,
+    availavality: 10,
     endTime: addHoursToTime(payload?.startTime, 2),
+    trainees: [],
   };
 
   const result = await ClassSchedule.create(preparedData);

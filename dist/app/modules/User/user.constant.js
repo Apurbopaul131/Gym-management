@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.USER_ROLE = exports.role = void 0;
-exports.role = ['admin', 'user'];
+exports.role = ['Admin', 'Trainer', 'Trainee'];
 exports.USER_ROLE = {
-    user: 'user',
-    admin: 'admin',
+    Admin: 'Admin',
+    Trainer: 'Trainer',
+    Trainee: 'Trainee',
 };
