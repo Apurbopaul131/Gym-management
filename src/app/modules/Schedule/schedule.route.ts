@@ -30,7 +30,7 @@ router.delete(
 
 // Show Trainer schedule class
 router.get(
-  '/v1/trainer-schedule',
+  '/v1/cancel-schedule/:id',
   auth(USER_ROLE?.Trainer),
   SchedulControllers.getTrainerSchedule,
 );

@@ -31,7 +31,7 @@ const classScheduleSchema = new Schema<IClassSchedule, ScheduleModel>(
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
-    ],
+    ], // Embedding booked trainees for ten trainees each sechedule(less data)
 
     availavality: {
       type: Number,
