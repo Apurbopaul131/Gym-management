@@ -28,7 +28,10 @@ const createScheduleClass = (payload) => __awaiter(void 0, void 0, void 0, funct
     }
     const preparedData = Object.assign(Object.assign({}, payload), { availavality: 10, endTime: (0, schedule_utils_1.addHoursToTime)(payload === null || payload === void 0 ? void 0 : payload.startTime, 2), trainees: [] });
     const result = yield schedule_model_1.ClassSchedule.create(preparedData);
-    return result;
+    const classSchedule = yield schedule_model_1.ClassSchedule.findById(result._id)
+        .select('classTitle date startTime endTime trainer availavality')
+        .populate('trainer', 'name email');
+    return classSchedule;
 });
 const bookScheduleIntoDB = (scheduleId, traineeId) => __awaiter(void 0, void 0, void 0, function* () {
     const schedule = yield schedule_model_1.ClassSchedule.findById(scheduleId);

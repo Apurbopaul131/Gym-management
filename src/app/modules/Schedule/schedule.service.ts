@@ -27,7 +27,10 @@ const createScheduleClass = async (
   };
 
   const result = await ClassSchedule.create(preparedData);
-  return result;
+  const classSchedule = await ClassSchedule.findById(result._id)
+    .select('classTitle date startTime endTime trainer availavality')
+    .populate('trainer', 'name email');
+  return classSchedule;
 };
 
 const bookScheduleIntoDB = async (scheduleId: string, traineeId: string) => {

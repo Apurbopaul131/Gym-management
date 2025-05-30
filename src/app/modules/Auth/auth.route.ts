@@ -9,18 +9,18 @@ import { AuthValidations } from './auth.validation';
 const router = express.Router();
 
 router.post(
-  '/auth/create-trainer',
+  '/v1/auth/create-trainer',
   auth(USER_ROLE?.Admin),
   validateRequest(UserValidations.createUserValidationSchema),
   AuthControllers.createTrainer,
 );
 router.post(
-  '/auth/create-trainee',
+  '/v1/auth/create-trainee',
   validateRequest(UserValidations.createUserValidationSchema),
   AuthControllers.createTrainee,
 );
 router.post(
-  '/auth/login',
+  '/v1/auth/login',
   validateRequest(AuthValidations.loginUserValidationSchema),
   AuthControllers.loginUser,
 );

@@ -9,28 +9,28 @@ import { ScheduleValidations } from './schedule.validation';
 const router = express.Router();
 //create schedule class
 router.post(
-  '/auth/create-schedule',
+  '/v1/create-schedule',
   auth(USER_ROLE?.Admin),
   validateRequest(ScheduleValidations.createtrainingClassValidationSchema),
   SchedulControllers.createScheduleClass,
 );
 // book an schedule class
 router.patch(
-  '/auth/book-schedule/:id',
+  '/v1/book-schedule/:id',
   auth(USER_ROLE?.Trainee),
   SchedulControllers.bookSchedule,
 );
 
 // cancle an schedule class
 router.delete(
-  '/auth/cancel-schedule/:id',
+  '/v1/cancel-schedule/:id',
   auth(USER_ROLE?.Trainee),
   SchedulControllers.cancleSchedule,
 );
 
 // Show Trainer schedule class
 router.get(
-  '/auth/trainer-schedule',
+  '/v1/trainer-schedule',
   auth(USER_ROLE?.Trainer),
   SchedulControllers.getTrainerSchedule,
 );
